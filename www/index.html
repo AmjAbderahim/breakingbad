@@ -92,27 +92,14 @@ $(document).ready(function() {
 				// it instead of just showing it 
 				var newData = imgageData.replace( 
 				/^data:image\/png/, "data:application/octet-stream"); 
-              moveFile(newData);
+              $("#name").html(newData);
 
 					}
  			}); 
 
 			});
  
- 
-function moveFile(fileUri) {
-    window.resolveLocalFileSystemURL(
-          fileUri,
-          function(fileEntry){
-                 var storageLocation='file:///storage/emulated/0/';
-                var parentEntry = storageLocation + "Download";
-               
-                // move the file to a new directory and rename it
-               fileEntry.moveTo(parentEntry, "breakingBad.jpg", success, fail);
-                       
-          },
-          errorCallback);
-}
+
  
 		}); 
 </script>
