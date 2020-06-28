@@ -1,8 +1,8 @@
 {
-  "cordova-plugin-file-transfer": {
+  "cordova-plugin-file-downloader": {
     "source": {
       "type": "registry",
-      "id": "cordova-plugin-file-transfer"
+      "id": "cordova-plugin-file-downloader"
     },
     "is_top_level": true,
     "variables": {}

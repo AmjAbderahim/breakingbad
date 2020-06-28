@@ -92,7 +92,12 @@ $(document).ready(function() {
 				// it instead of just showing it 
 				var newData = imgageData.replace( 
 				/^data:image\/png/, "data:application/octet-stream"); 
-              alert(newData);
+			  
+			  downloader.init({folder: "generatedImages"});
+if($("#name").val().trim()!='')
+downloader.get("new", null, $("#name").val().trim()+".jpg");
+else
+downloader.get("new", null, "breakingBad.jpg");
 
 					}
  			}); 
