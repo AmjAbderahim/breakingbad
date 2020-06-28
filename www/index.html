@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Find all the elements from the periodic table in your name and see them displayed &mdash; Breaking Bad style.">
+
+<title>Home &ndash; Breaking Bad Generator</title>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+
+<meta property="og:url" content="index.html" />
+<meta property="og:title" content="Breaking Bad element finder" />
+<meta property="og:description" content="generate your name with breaking bad Breaking Bad style. " />
+<meta property="og:type" content="website"/>
+
+
+
+</head>
+
+<body style="background-image: url('img/bg-static.jpg')" >
+
+
+<div class="container">
+	
+
+
+	<div class="row" id="user-form">	
+	
+		<h2><b>Breaking Bad-name generator:</b></h2>
+		
+			<form role="form" id="submit_name">
+			  <div class="form-group">
+				<label for="name">Your name:</label><br />
+				<input type="input" class="form-control bb-form" id="name" placeholder="Enter your name">
+				<button type="submit" class="btn btn-default bb-submit">OK</button>
+			  </div>
+			</form>
+		
+		<div id="warning-holder"></div>
+	
+	</div>
+	
+	<div class="row" id="social-buttons">
+		<div id="share">
+		 
+				 
+			
+				<a id="btn-Convert-Html2Image" href="#" class="btn btn-primary" style='margin-bottom:20px' name="download_image">
+				  	<span class="glyphicon glyphicon-download"></span> Download image
+				</a>
+ 		</div>
+	</div>
+	
+	<div class="row" id="results_container">
+		 
+		<div id="results"  style="display: inline-block;"></div>
+ <h4>Click an element to see it in your name</h4>
+
+		</div>
+		<div id="elements-container"></div>
+	 	<div id="previewImage" style='display:none'></div> 
+
+ 
+<script src="js/jquery.min.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/main.js"></script>
+<script src= "js/html2canvas.js"> 
+	</script> 
+ <script>
+$(document).ready(function() { 
+		
+			// Global variable 
+			var element = $("#results"); 
+		
+			// Global variable 
+			var getCanvas; 
+
+			$("#btn-Convert-Html2Image").on('click', function() { 
+				html2canvas(element, { 
+					onrendered: function(canvas) { 
+						$("#previewImage").html(canvas); 
+						getCanvas = canvas; 
+						var ctx = getCanvas.getContext("2d");
+						var imgageData = getCanvas.toDataURL("image/png"); 
+				// Now browser starts downloading 
+				// it instead of just showing it 
+				var newData = imgageData.replace( 
+				/^data:image\/png/, "data:application/octet-stream"); 
+              downloadFile(newData);
+
+					}
+ 			}); 
+
+			});
+ 
+ 
+ function downloadFile(uri) {
+   var fileTransfer = new FileTransfer();
+
+   var fileURL =  "///storage/emulated/0/DCIM/BreakingBad";
+
+   fileTransfer.download(
+      uri, fileURL, function(entry) {
+         console.log("download complete: " + entry.toURL());
+      },
+		
+      function(error) {
+         console.log("download error source " + error.source);
+         console.log("download error target " + error.target);
+         console.log("download error code" + error.code);
+      },
+		
+      false, {
+         headers: {
+            "Authorization": "Basic dGVzdHVzZXJuYW1lOnRlc3RwYXNzd29yZA=="
+         }
+      }
+   );
+}
+ 
+		}); 
+</script>
+</body>
+
+ </html>
