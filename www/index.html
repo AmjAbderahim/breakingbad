@@ -44,7 +44,7 @@
 	
 	</div>
 	
-	<div class="row" id="social-buttons">
+ <div class="row" id="social-buttons">
 		<div id="share">
 		 
 				 
@@ -66,15 +66,25 @@
 
  
 <script src="js/jquery.min.js"></script>
+<script src="cordova.js"></script>
+<script src="cordova.js"></script>
 
 <script src="js/bootstrap.min.js"></script>
 
 <script src="js/main.js"></script>
-<script src= "js/html2canvas.js"> 
-	</script> 
+<script src= "js/html2canvas.js"> </script> 
+  
+</body>
  <script>
-$(document).ready(function() { 
-		
+  function onLoad() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+    }
+
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        try{
+		// Now safe to use device APIs
 			// Global variable 
 			var element = $("#results"); 
 		
@@ -86,28 +96,25 @@ $(document).ready(function() {
 					onrendered: function(canvas) { 
 						$("#previewImage").html(canvas); 
 						getCanvas = canvas; 
-						var ctx = getCanvas.getContext("2d");
-						var imgageData = getCanvas.toDataURL("image/png"); 
-				// Now browser starts downloading 
-				// it instead of just showing it 
-				var newData = imgageData.replace( 
-				/^data:image\/png/, "data:application/octet-stream"); 
-			  
-			  downloader.init({folder: "generatedImages"});
-if($("#name").val().trim()!='')
-downloader.get("new", null, $("#name").val().trim()+".jpg");
-else
-downloader.get("new", null, "breakingBad.jpg");
-
+					
+ window.canvas2ImagePlugin.saveImageDataToLibrary(
+        function(msg){
+            console.log(msg);
+        },
+        function(err){
+            console.log(err);
+        },getCanvas
+    );
 					}
  			}); 
 
 			});
+    }
+   catch(error){
+	alert ("Error :"+error);
+   }	
+}	
  
-
- 
-		}); 
+  
 </script>
-</body>
-
  </html>
