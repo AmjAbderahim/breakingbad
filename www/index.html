@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
@@ -21,7 +20,7 @@
 
 </head>
 
-<body style="background-image: url('img/bg-static.jpg')" >
+<body style="background-image: url('img/bg-static.jpg')"  onload="onLoad()">
 
 
 <div class="container">
@@ -67,53 +66,53 @@
  
 <script src="js/jquery.min.js"></script>
 <script src="cordova.js"></script>
-<script src="cordova.js"></script>
-
 <script src="js/bootstrap.min.js"></script>
-
 <script src="js/main.js"></script>
 <script src= "js/html2canvas.js"> </script> 
   
 </body>
  <script>
-  function onLoad() {
+ function onLoad() {
         document.addEventListener("deviceready", onDeviceReady, false);
     }
 
-    // device APIs are available
+    // PhoneGap is loaded and it is now safe to make calls PhoneGap methods
     //
     function onDeviceReady() {
-        try{
-		// Now safe to use device APIs
+        // Now safe to use the PhoneGap API
+		
+			// Now safe to use device APIs
 			// Global variable 
 			var element = $("#results"); 
 		
-			// Global variable 
-			var getCanvas; 
+		
 
 			$("#btn-Convert-Html2Image").on('click', function() { 
-				html2canvas(element, { 
-					onrendered: function(canvas) { 
-						$("#previewImage").html(canvas); 
-						getCanvas = canvas; 
-					
- window.canvas2ImagePlugin.saveImageDataToLibrary(
+				
+	html2canvas(element, {
+    height: 500,
+    width: 350,
+    onrendered: function (canvas) {
+     console.log(canvas)
+	 window.canvas2ImagePlugin.saveImageDataToLibrary(
         function(msg){
-            console.log(msg);
+            console.log("Imaged saved to URI : "+msg);
         },
         function(err){
-            console.log(err);
-        },getCanvas
-    );
-					}
- 			}); 
-
+           alert(err);
+        },
+        canvas 
+   );
+    }
+  });
 			});
     }
-   catch(error){
-	alert ("Error :"+error);
-   }	
-}	
+  
+
+ 
+     
+  	
+
  
   
 </script>
